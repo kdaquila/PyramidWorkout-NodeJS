@@ -1,11 +1,11 @@
 @use "sizes";
 @use "sass:map";
 
-$serif: 'Domine', serif;
-$sans-serif: 'Montserrat', sans-serif;
+$sans: 'Nunito Sans', sans-serif;
 
-$serif-line-height: 1.15;
-$sans-line-height: 1.35;
+$sans-line-height: 1.70;
+$sans-lite-line-height: 1.70;
+$sans-bold-line-height: 1.0;
 
 $font-sizes: (
         "2xs": 10px,
@@ -29,56 +29,52 @@ $font-sizes: (
   @each $breakpoint-name, $breakpoint-data in sizes.$breakpoints {
     @media screen and (min-width: map.get($breakpoint-data, "px")) {
 
-      .serif-#{$size-index}#{map.get($breakpoint-data, "suffix")} {
-        font-family: $serif;
-        font-size: $size-px;
-        line-height: $serif-line-height;
-      }
       .sans-#{$size-index}#{map.get($breakpoint-data, "suffix")} {
-        font-family: $sans-serif;
+        font-family: $sans;
         font-size: $size-px;
         line-height: $sans-line-height;
+        font-weight: 400;
       }
-      .serif-bold-#{$size-index}#{map.get($breakpoint-data, "suffix")} {
-        @extend .serif-#{$size-index}#{map.get($breakpoint-data, "suffix")};
-        font-weight: bold;
+
+      .sans-lite-#{$size-index}#{map.get($breakpoint-data, "suffix")} {
+        font-family: $sans;
+        font-size: $size-px;
+        line-height: $sans-lite-line-height;
+        font-weight: 300;
       }
+
       .sans-bold-#{$size-index}#{map.get($breakpoint-data, "suffix")} {
-        @extend .sans-#{$size-index}#{map.get($breakpoint-data, "suffix")};
-        font-weight: bold;
+        font-family: $sans;
+        font-size: $size-px;
+        line-height: $sans-bold-line-height;
+        font-weight: 700;
       }
     }
   }
 }
 
 // font style mixins
-@mixin serif-font($size:"sm", $breakpoint:"xs") {
-  @media screen and (min-width: map.get(map.get(sizes.$breakpoints, $breakpoint), "px")) {
-    font-family: $serif;
-    font-size: map.get($font-sizes, $size);
-    line-height: $serif-line-height;
-  }
-}
-@mixin serif-bold-font($size:"sm", $breakpoint:"xs") {
-  @media screen and (min-width: map.get(map.get(sizes.$breakpoints, $breakpoint), "px")) {
-    font-family: $serif;
-    font-weight: bold;
-    font-size: map.get($font-sizes, $size);
-    line-height: $serif-line-height;
-  }
-}
 @mixin sans-font($size:"sm", $breakpoint:"xs") {
   @media screen and (min-width: map.get(map.get(sizes.$breakpoints, $breakpoint), "px")) {
-    font-family: $sans-serif;
+    font-family: $sans;
+    font-weight: 400;
     font-size: map.get($font-sizes, $size);
     line-height: $sans-line-height;
   }
 }
 @mixin sans-bold-font($size:"sm", $breakpoint:"xs") {
   @media screen and (min-width: map.get(map.get(sizes.$breakpoints, $breakpoint), "px")) {
-    font-family: $sans-serif;
-    font-weight: bold;
+    font-family: $sans;
+    font-weight: 700;
     font-size: map.get($font-sizes, $size);
-    line-height: $sans-line-height;
+    line-height: $sans-lite-line-height;
+  }
+}
+@mixin sans-lite-font($size:"sm", $breakpoint:"xs") {
+  @media screen and (min-width: map.get(map.get(sizes.$breakpoints, $breakpoint), "px")) {
+    font-family: $sans;
+    font-weight: 300;
+    font-size: map.get($font-sizes, $size);
+    line-height: $sans-bold-line-height;
   }
 }
