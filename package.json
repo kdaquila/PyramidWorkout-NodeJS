@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "run-s compile:styles start:server",
+    "start:dev": "run-p watch:styles start:server",
     "start:server": "node server.js", 
     "compile:atomizer": "atomizer --recursive --namespace=#atomic --rtl -c atomizer.config.js --outfile=scss/_atomic.scss ./views",
     "compile:sass": "sass scss:css",
