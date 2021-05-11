@@ -3,6 +3,14 @@ const express = require('express');
 const logger = require('morgan');
 const createError = require('http-errors');
 const homeRouter = require('./routes/home').router;
+const loginRouter = require('./routes/login').router;
+const signupRouter = require('./routes/signup').router;
+const emailVerifyRouter = require('./routes/emailVerify').router;
+const forgotPasswordRouter = require('./routes/forgotPassword').router;
+const browseRouter = require('./routes/browse').router;
+const detailRouter = require('./routes/detail').router;
+const newWorkoutRouter = require('./routes/newWorkout').router;
+const accountRouter = require('./routes/account').router;
 
 const app = express();
 
@@ -24,7 +32,15 @@ app.use('/javascript', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'javascript', req.url));
 });
 
-app.use('/', homeRouter);
+app.use(['/home', '/'], homeRouter);
+app.use('/login', loginRouter);
+app.use('/signup', signupRouter);
+app.use('/emailVerify', emailVerifyRouter);
+app.use('/forgotPassword', forgotPasswordRouter);
+app.use('/browse', browseRouter);
+app.use('/detail', detailRouter);
+app.use('/newWorkout', newWorkoutRouter);
+app.use('/account', accountRouter);
 
 app.use(throwError404);
 app.use(defaultErrorHandler)
