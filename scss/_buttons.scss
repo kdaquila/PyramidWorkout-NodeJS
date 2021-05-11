@@ -1,0 +1,78 @@
+@use "sass:map";
+@use "colors";
+
+.button-brown {
+  color: map.get(map.get(colors.$font-colors,"brown"), "1");
+  text-decoration: none;
+  outline: none;
+  padding: 0.5em 1.5em;
+  border-radius: 0.2em;
+  border: 0.1em solid map.get(colors.$brown-palette, "30");
+  background-image: linear-gradient(0deg, map.get(colors.$brown-palette, "90"), map.get(colors.$brown-palette, "70"));
+  cursor: pointer;
+
+  &:hover {
+    background-image: linear-gradient(0deg, map.get(colors.$brown-palette, "80"), map.get(colors.$brown-palette, "60"));
+  }
+
+  &:active {
+    background-image: linear-gradient(0deg, map.get(colors.$brown-palette, "75"), map.get(colors.$brown-palette, "55"));
+  }
+
+  &:focus {
+    box-shadow: 0 0 0.1em 0.2em map.get(colors.$brown-palette, "50");
+  }
+}
+
+.fluidButton-brown {
+  @extend .button-brown;
+  width: 100%;
+  text-align: center;
+}
+
+.ghostButton-blue {
+  display: inline-block;
+  color: map.get(colors.$blue-palette,"20");
+  text-decoration: none;
+  outline: none;
+  padding: 0.5em 1.5em;
+  border-radius: 0.2em;
+  border: 0.1em solid map.get(colors.$blue-palette, "50");
+  cursor: pointer;
+  background-color: transparent;
+
+  &:hover {
+    background-color: map.get(colors.$blue-palette, "90");
+  }
+
+  &:active {
+    background-color: map.get(colors.$blue-palette, "85");
+  }
+
+  &:focus {
+    box-shadow: 0 0 0.1em 0.2em map.get(colors.$blue-palette, "60");
+  }
+}
+
+.ghostButton-brown {
+  display: inline-block;
+  color: map.get(colors.$brown-palette,"30");
+  text-decoration: none;
+  outline: none;
+  padding: 0.5em 1.5em;
+  border-radius: 0.2em;
+  border: 0.1em solid map.get(colors.$brown-palette, "50");
+  cursor: pointer;
+
+  &:hover {
+    background-color: map.get(colors.$brown-palette, "90");
+  }
+
+  &:active {
+    background-color: map.get(colors.$brown-palette, "85");
+  }
+
+  &:focus {
+    box-shadow: 0 0 0.1em 0.2em map.get(colors.$brown-palette, "50");
+  }
+}

@@ -1,0 +1,203 @@
+@use "sass:map";
+
+$blue-palette: (
+   "5": hsl(223,14%,5%),
+  "10": hsl(223,14%,10%),
+  "15": hsl(223,14%,15%),
+  "20": hsl(223,14%,20%),
+  "25": hsl(223,14%,25%),
+  "30": hsl(223,14%,30%),
+  "35": hsl(223,14%,35%),
+  "40": hsl(223,14%,40%),
+  "45": hsl(223,14%,45%),
+  "50": hsl(223,14%,50%),
+  "55": hsl(223,14%,55%),
+  "60": hsl(223,14%,60%),
+  "65": hsl(223,14%,65%),
+  "70": hsl(223,14%,70%),
+  "75": hsl(223,14%,75%),
+  "80": hsl(223,14%,80%),
+  "85": hsl(223,14%,85%),
+  "90": hsl(223,14%,90%),
+  "95": hsl(223,14%,95%),
+);
+$brown-palette: (
+  "5": hsl(34,19%,5%),
+  "10": hsl(34,19%,10%),
+  "15": hsl(34,19%,15%),
+  "20": hsl(34,19%,20%),
+  "25": hsl(34,19%,25%),
+  "30": hsl(34,19%,30%),
+  "35": hsl(34,19%,35%),
+  "40": hsl(34,19%,40%),
+  "45": hsl(34,19%,45%),
+  "50": hsl(34,19%,50%),
+  "55": hsl(34,19%,55%),
+  "60": hsl(34,19%,60%),
+  "65": hsl(34,19%,65%),
+  "70": hsl(34,19%,70%),
+  "75": hsl(34,19%,75%),
+  "80": hsl(34,19%,80%),
+  "85": hsl(34,19%,85%),
+  "90": hsl(34,19%,90%),
+  "95": hsl(34,19%,95%),
+);
+$gray-palette: (
+  "5": hsl(34,0%,5%),
+  "10": hsl(34,0%,10%),
+  "15": hsl(34,0%,15%),
+  "20": hsl(34,0%,20%),
+  "25": hsl(34,0%,25%),
+  "30": hsl(34,0%,30%),
+  "35": hsl(34,0%,35%),
+  "40": hsl(34,0%,40%),
+  "45": hsl(34,0%,45%),
+  "50": hsl(34,0%,50%),
+  "55": hsl(34,0%,55%),
+  "60": hsl(34,0%,60%),
+  "65": hsl(34,0%,65%),
+  "70": hsl(34,0%,70%),
+  "75": hsl(34,0%,75%),
+  "80": hsl(34,0%,80%),
+  "85": hsl(34,0%,85%),
+  "90": hsl(34,0%,90%),
+  "95": hsl(34,0%,95%),
+);
+$base-colors: (
+  "blue": $blue-palette,
+  "brown": $brown-palette,
+  "gray": $gray-palette,
+);
+$font-colors: (
+  "blue": (
+    "1": map.get($blue-palette, "20"),
+    "2": map.get($blue-palette, "40"),
+    "3": map.get($blue-palette, "60"),
+    "4": map.get($blue-palette, "75"),
+    "5": map.get($blue-palette, "95")
+  ),
+  "brown": (
+    "1": map.get($brown-palette, "20"),
+    "2": map.get($brown-palette, "40"),
+    "3": map.get($brown-palette, "60"),
+    "4": map.get($brown-palette, "75"),
+    "5": map.get($brown-palette, "95")
+  ),
+);
+
+// generate base-color classes
+@each $hue_name, $color_map in $base-colors {
+  @each $lightness, $color_value in $color_map {
+    .#{$hue_name}-#{$lightness} {
+      color: $color_value;
+    }
+  }
+}
+
+// generate font-color classes
+@each $hue_name, $color_map in $font-colors {
+  @each $index, $color_value in $color_map {
+    .text-#{$hue_name}-#{$index} {
+      color: $color_value;
+    }
+  }
+}
+
+// generate background-color classes
+@each $hue_name, $color_map in $base-colors {
+  @each $index, $color_value in $color_map {
+    .bg-#{$hue_name}-#{$index} {
+      background-color: $color_value;
+    }
+  }
+}
+
+// manually generated font-color mixins
+@mixin text-brown-1 {
+  color: map.get(map.get($font-colors, "brown"), "1");
+}
+@mixin text-brown-2 {
+  color: map.get(map.get($font-colors, "brown"), "2");
+}
+@mixin text-brown-3 {
+  color: map.get(map.get($font-colors, "brown"), "3");
+}
+@mixin text-brown-4 {
+  color: map.get(map.get($font-colors, "brown"), "4");
+}
+@mixin text-brown-5 {
+  color: map.get(map.get($font-colors, "brown"), "5");
+}
+
+@mixin text-blue-1 {
+  color: map.get(map.get($font-colors, "blue"), "1");
+}
+@mixin text-blue-2 {
+  color: map.get(map.get($font-colors, "blue"), "2");
+}
+@mixin text-blue-3 {
+  color: map.get(map.get($font-colors, "blue"), "3");
+}
+@mixin text-blue-4 {
+  color: map.get(map.get($font-colors, "blue"), "4");
+}
+@mixin text-blue-5 {
+  color: map.get(map.get($font-colors, "blue"), "5");
+}
+
+// border color
+@mixin border-blue($level: "5") {
+  border-color: map.get($blue-palette, $level) ;
+}
+
+@mixin border-brown($level: "5") {
+  border-color: map.get($brown-palette, $level) ;
+}
+
+@mixin border-gray($level: "5") {
+  border-color: map.get($gray-palette, $level) ;
+}
+
+// manually generated background-color mixins
+@mixin bg-blue($level:"20") {
+  background-color: map.get($blue-palette, $level);
+}
+
+// links
+.link-blue-1 {
+  text-decoration: underline;
+  color: map.get(map.get($font-colors, "blue"), "1");
+
+  &:visited {
+    color: map.get(map.get($font-colors, "blue"), "2");
+  }
+
+  &:hover {
+    color: map.get(map.get($font-colors, "blue"), "2");
+  }
+}
+.link-brown-1 {
+  text-decoration: underline;
+  color: map.get(map.get($font-colors, "brown"), "1");
+
+  &:visited {
+    color: map.get(map.get($font-colors, "brown"), "2");
+  }
+
+  &:hover {
+    color: map.get(map.get($font-colors, "brown"), "2");
+  }
+}
+
+@mixin link-blue-1 {
+  text-decoration: underline;
+  color: map.get(map.get($font-colors, "blue"), "1");
+
+  &:visited {
+    color: map.get(map.get($font-colors, "blue"), "2");
+  }
+
+  &:hover {
+    color: map.get(map.get($font-colors, "blue"), "2");
+  }
+}

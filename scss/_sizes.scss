@@ -1,0 +1,31 @@
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+$breakpoints: (
+  "xs": (
+    "suffix": "",
+    "px": 1px
+  ),
+  "sm": (
+    "suffix": -\@sm,
+    "px": $sm
+  ),
+  "md": (
+    "suffix": -\@md,
+    "px": $md
+  ),
+  "lg": (
+    "suffix": -\@lg,
+    "px": $lg
+  ),
+  "xl": (
+    "suffix": -\@xl,
+    "px": $xl
+  ),
+);
+
+$maxWidth: 1400px;
+
+$heroHeight: 542px;
