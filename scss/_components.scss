@@ -1,5 +1,7 @@
 @use "sizes";
 @use "fonts";
+@use "colors";
+@use "sass:map";
 
 .featureCard__img {
     height: 60px;
@@ -20,4 +22,8 @@
     @include fonts.sans-lite-font("sm");
     @include fonts.sans-lite-font("lg", "sm");
     text-align: center;
+}
+
+.footer__background {
+    background-color: map.get(colors.$gray-palette, "25");
 }
