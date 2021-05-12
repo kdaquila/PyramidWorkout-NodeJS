@@ -1,0 +1,23 @@
+@use "sizes";
+@use "fonts";
+
+.featureCard__img {
+    height: 60px;
+    margin-bottom: 12px;
+
+    @media screen and (min-width: sizes.$sm) {
+        height: 75px;
+    }
+}
+
+.featureCard__heading {
+    @include fonts.sans-font("lg");
+    @include fonts.sans-font("2xl", "sm");
+    margin-bottom: 12px;
+}
+
+.featureCard__text {
+    @include fonts.sans-lite-font("sm");
+    @include fonts.sans-lite-font("lg", "sm");
+    text-align: center;
+}

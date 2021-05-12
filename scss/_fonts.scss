@@ -67,7 +67,7 @@ $font-sizes: (
     font-family: $sans;
     font-weight: 700;
     font-size: map.get($font-sizes, $size);
-    line-height: $sans-lite-line-height;
+    line-height: $sans-bold-line-height;
   }
 }
 @mixin sans-lite-font($size:"sm", $breakpoint:"xs") {
@@ -75,6 +75,6 @@ $font-sizes: (
     font-family: $sans;
     font-weight: 300;
     font-size: map.get($font-sizes, $size);
-    line-height: $sans-bold-line-height;
+    line-height: $sans-lite-line-height;
   }
 }

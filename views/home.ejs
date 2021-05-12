@@ -13,15 +13,41 @@
 
 <section class="body__expandingSection">
     <!-- Hero section -->
-    <div class="container Py(90px) D(f) Jc(c)">
+    <div class="container D(f) Jc(c) Py(90px) Mb(50px)--md">
         <div class="Ta(c)">
-            <h1 class="sans-bold-4xl sans-bold-7xl-@md">FITNESS</h1>
-            <h1 class="sans-bold-4xl sans-bold-7xl-@md red-border-bottom D(ib) Pb(20px) Mb(20px)">TRAINING</h1>
-            <h2 class="sans-md sans-2xl-@md Mb(20px) Maw(500px)">Our free pyramid workout app will guide you step-by-step to reach your fitness goals.</h2>
-            <a class="button-red sans-bold-xs sans-bold-lg-@md" href="/signup">Create Free Account</a>
-            <a class="ghostButton-gray sans-bold-xs sans-bold-lg-@md" href="/login">Login</a> 
+            <h1 class="sans-bold-4xl sans-bold-7xl-@sm">FITNESS</h1>
+            <h1 class="sans-bold-4xl sans-bold-7xl-@sm red-border-bottom D(ib) Pb(20px) Px(0.5em) Mb(20px)">TRAINING</h1>
+            <h2 class="sans-md sans-2xl-@sm Mb(20px) Maw(500px)">Our free pyramid workout app will guide you step-by-step to reach your fitness goals.</h2>
+            <a class="button-red sans-bold-xs sans-bold-lg-@sm" href="/signup">Create Free Account</a>
+            <a class="ghostButton-gray sans-bold-xs sans-bold-lg-@sm" href="/login">Login</a> 
         </div>
     </div>
+
+    <!-- Features -->
+    <div class="container">
+        <div class="D(f) Jc(c)">
+            <h1 class="sans-bold-2xl sans-bold-5xl-@sm Ta(c) D(b) red-border-bottom Pb(20px) Px(0.5em) Mb(50px)">Why Pyramid?</h1>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center Mb(50px)">
+                <img class="featureCard__img" src="/image/AllInOne.svg" alt="All In One">
+                <h2 class="featureCard__heading">All-in-One</h2>
+                <p class="featureCard__text">A pyramid workout contains a warm-up, an exercise challenge, and a cool down. The first set is very easy, which makes it easy to get started.</p>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center Mb(50px)">
+                <img class="featureCard__img"src="/image/Customize.svg" alt="Customize">
+                <h2 class="featureCard__heading">Custom Fitness Level</h2>
+                <p class="featureCard__text">No matter what your current fitness level is, you can customize the pyramid to get a workout that massively benefits your body, but isn’t too hard.</p>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center Mb(50px)">
+                <img class="featureCard__img"src="/image/EnjoyRide.svg" alt="EnjoyRide">
+                <h2 class="featureCard__heading">Enjoy the Ride</h2>
+                <p class="featureCard__text">Remember that you don’t have to complete the whole pyramid each time. The idea is to work towards that goal and enjoy the ride!</p>
+            </div>
+        </div>
+
+    </div>
+
 </section>
 
 <%- include('./_footer'); %>
