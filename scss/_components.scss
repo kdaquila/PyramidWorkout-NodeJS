@@ -27,3 +27,15 @@
 .footer__background {
     background-color: map.get(colors.$gray-palette, "25");
 }
+
+.bullet__list {
+    list-style: none;
+}
+
+.bullet__item {
+    background-image: url("/image/TriangleBullet.svg");
+    background-size: 0.8em;
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 1.5em;
+}
