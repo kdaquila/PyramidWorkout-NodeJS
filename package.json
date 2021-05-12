@@ -6,10 +6,10 @@
     "start": "run-s compile:styles start:server",
     "start:dev": "run-p watch:styles start:server",
     "start:server": "node server.js", 
-    "compile:atomizer": "atomizer --recursive --namespace=#atomic --rtl -c atomizer.config.js --outfile=scss/_atomic.scss ./views",
+    "compile:atomizer": "atomizer --recursive --namespace=#atomic -c atomizer.config.js --outfile=scss/_atomic.scss ./views",
     "compile:sass": "sass scss:css",
     "compile:styles": "run-s compile:atomizer compile:sass",
-    "watch:atomizer": "atomizer --recursive --namespace=#atomic --rtl -c atomizer.config.js --outfile=scss/_atomic.scss --watch=./views",
+    "watch:atomizer": "atomizer --recursive --namespace=#atomic -c atomizer.config.js --outfile=scss/_atomic.scss --watch=./views",
     "watch:sass": "sass --watch scss:css",
     "watch:styles:": "run-p watch:atomizer watch:sass"
   },
