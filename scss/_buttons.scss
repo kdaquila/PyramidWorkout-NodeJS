@@ -9,16 +9,16 @@
   margin: 0.5em;
   outline: none;
   border-radius: 0.2em;
-  background-image: linear-gradient(0deg, map.get(colors.$red-palette, "35"), map.get(colors.$red-palette, "45"));
+  background-image: linear-gradient(0deg, map.get(colors.$red-palette, "30"), map.get(colors.$red-palette, "40"));
   background-origin: border-box;
   cursor: pointer;
 
   &:hover {
-    background-image: linear-gradient(0deg, map.get(colors.$red-palette, "30"), map.get(colors.$red-palette, "40"));
+    background-image: linear-gradient(0deg, map.get(colors.$red-palette, "25"), map.get(colors.$red-palette, "35"));
   }
 
   &:active {
-    background-image: linear-gradient(0deg, map.get(colors.$red-palette, "25"), map.get(colors.$red-palette, "35"));
+    background-image: linear-gradient(0deg, map.get(colors.$red-palette, "20"), map.get(colors.$red-palette, "30"));
   }
 
   &:focus {
