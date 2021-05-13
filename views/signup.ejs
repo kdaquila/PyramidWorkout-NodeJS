@@ -7,13 +7,22 @@
 
 <body class="body" id='atomic'>
 
-<section class="">
+<section class="Mb(50px)">
     <%- include('./_navbar'); %>
 </section>
 
 <section class="body__expandingSection">
-    <div class="container">
-        <p class="My(50px) text-brown-2">Signup</p>
+    <div class="container D(f) Jc(c) Mb(50px)">
+        <form class="" action="/login" method="POST">
+            <h1 class="sans-bold-2xl sans-bold-5xl-@sm sans-bold-5xl-@sm Mb(0.5em)">Create Account</h1>
+            <label class="form__label" for="usernameTextBox">Username</label>
+            <input class="form__textbox" type="text" name="username" id="usernameTextBox">
+            <label class="form__label" for="passwordTextBox">Password</label>
+            <input class="form__textbox" type="password" name="password" id="passwordTextBox">
+            <label class="form__label" for="confirmPasswordTextBox">Confirm Password</label>
+            <input class="form__textbox" type="password" name="confirmPassword" id="confirmPasswordTextBox">
+            <button class="button-red sans-bold-xs sans-bold-lg-@sm Mb(50px)" type="submit">Submit</button>
+        </form>
     </div>
 </section>
 
