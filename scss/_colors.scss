@@ -23,25 +23,26 @@ $red-palette: (
 );
 
 $gray-palette: (
-  "5": hsl(34,0%,5%),
-  "10": hsl(34,0%,10%),
-  "15": hsl(34,0%,15%),
-  "20": hsl(34,0%,20%),
-  "25": hsl(34,0%,25%),
-  "30": hsl(34,0%,30%),
-  "35": hsl(34,0%,35%),
-  "40": hsl(34,0%,40%),
-  "45": hsl(34,0%,45%),
-  "50": hsl(34,0%,50%),
-  "55": hsl(34,0%,55%),
-  "60": hsl(34,0%,60%),
-  "65": hsl(34,0%,65%),
-  "70": hsl(34,0%,70%),
-  "75": hsl(34,0%,75%),
-  "80": hsl(34,0%,80%),
-  "85": hsl(34,0%,85%),
-  "90": hsl(34,0%,90%),
-  "95": hsl(34,0%,95%),
+  "5": hsl(0,0%,5%),
+  "10": hsl(0,0%,10%),
+  "15": hsl(0,0%,15%),
+  "20": hsl(0,0%,20%),
+  "25": hsl(0,0%,25%),
+  "30": hsl(0,0%,30%),
+  "35": hsl(0,0%,35%),
+  "40": hsl(0,0%,40%),
+  "45": hsl(0,0%,45%),
+  "50": hsl(0,0%,50%),
+  "55": hsl(0,0%,55%),
+  "60": hsl(0,0%,60%),
+  "65": hsl(0,0%,65%),
+  "70": hsl(0,0%,70%),
+  "75": hsl(0,0%,75%),
+  "80": hsl(0,0%,80%),
+  "85": hsl(0,0%,85%),
+  "90": hsl(0,0%,90%),
+  "95": hsl(0,0%,95%),
+  "98": hsl(0,0%,98%),
 );
 $base-colors: (
   "red": $red-palette,
@@ -75,6 +76,11 @@ $font-colors: (
   }
 }
 
+// background color mixin
+@mixin bg-gray($level:"55") {
+  background-color: map.get($gray-palette, $level);
+}
+
 // generate border-color classes
 @each $hue_name, $color_map in $base-colors {
   @each $index, $color_value in $color_map {
@@ -82,6 +88,11 @@ $font-colors: (
       border-color: $color_value;
     }
   }
+}
+
+// background color mixin
+@mixin bd-gray($level:"55") {
+  border-color: map.get($gray-palette, $level);
 }
 
 // manually generated font-color mixins
@@ -103,7 +114,7 @@ $font-colors: (
 
 // links
 .link-gray-1 {
-  text-decoration: underline;
+  text-decoration: none;
   color: map.get(map.get($font-colors, "gray"), "1");
 
   &:visited {
