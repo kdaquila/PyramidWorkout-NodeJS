@@ -60,6 +60,8 @@
 }
 
 .flashMessage {
+    @include fonts.sans-font("sm");
+    @include fonts.sans-font("lg","sm");
     padding: 1em;
     margin-bottom: 50px;
 }
