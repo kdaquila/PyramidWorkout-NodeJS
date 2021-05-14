@@ -15,6 +15,10 @@ router.post('/', async function(req, res, next) {
   try {
     // Validate inputs
     if (!(req.body.username && req.body.password && req.body.confirmPassword)) throw Error("All fields are required.")
+    if (req.body.password !== req.body.confirmPassword) throw Error("Passwords must match.")
+
+    // Hash the password
+
 
     // Create account
     createUser(req.body.username, req.body.password)
