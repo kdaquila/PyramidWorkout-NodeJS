@@ -1,0 +1,16 @@
+<% if (flash && (flash.status === "error")) { %>
+    <div class="container">
+        <div class="flashMessage flashMessage__bg--error">
+            <p class="flashMessage__text--error"><%= flash && flash.message %></p>
+        </div>
+    </div>
+<% } else if (flash && (flash.status === "success")) {  %>
+    <div class="container">
+        <div class="flashMessage flashMessage__bg--success">
+            <p class="flashMessage__text--success"><%= flash && flash.message %></p>
+        </div>
+    </div>
+<% } %>
+
+
+

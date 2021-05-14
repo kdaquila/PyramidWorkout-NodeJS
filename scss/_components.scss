@@ -58,3 +58,24 @@
     margin-bottom: 1.5em;
     padding: 0.5em;
 }
+
+.flashMessage {
+    padding: 1em;
+    margin-bottom: 50px;
+}
+
+.flashMessage__bg--success {
+    background-color: rgb(184, 255, 188);
+}
+
+.flashMessage__bg--error {
+    background-color: rgb(255, 174, 174);
+}
+
+.flashMessage__text--success {
+    color: rgb(76, 124, 79);
+}
+
+.flashMessage__text--error {
+    color: rgb(122, 44, 44);
+}

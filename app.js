@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cookieSession = require('cookie-session')
 const logger = require('morgan');
 const createError = require('http-errors');
 const homeRouter = require('./routes/home').router;
@@ -21,7 +22,26 @@ app.set('views', path.join(__dirname, 'views'));
 // setup logging
 app.use(logger('dev'));
 
+// setup req.body
 app.use(express.urlencoded({extended: true}))
+
+// setup req.session
+app.use(cookieSession({
+  name: "pyramid-session",
+  keys: [process.env.COOKIE_SECRET1, process.env.COOKIE_SECRET2, process.env.COOKIE_SECRET3]
+}))
+
+// save old flash message
+app.use((req, res, next) => {
+  res.locals.flash = req.session.flash;
+  next();
+})
+
+// clear old flash message
+app.use((req, res, next) => {
+  req.session.flash = null;
+  next();
+})
 
 // setup static routes
 app.use('/image', (req, res, next) => {
