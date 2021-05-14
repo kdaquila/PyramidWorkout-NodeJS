@@ -16,6 +16,7 @@
   "dependencies": {
     "atomizer": "^3.8.0",
     "bootstrap": "^4.6.0",
+    "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "~4.16.1",
