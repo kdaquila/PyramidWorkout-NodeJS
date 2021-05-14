@@ -21,7 +21,9 @@ app.set('views', path.join(__dirname, 'views'));
 // setup logging
 app.use(logger('dev'));
 
-// setup route to the public folder
+app.use(express.urlencoded({extended: true}))
+
+// setup static routes
 app.use('/image', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'image', req.url));
 });
