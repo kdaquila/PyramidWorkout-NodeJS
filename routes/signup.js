@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {MongoClient} = require('mongodb');
 
 router.get('/', async function(req, res, next) {
   try {
@@ -16,6 +17,7 @@ router.post('/', async function(req, res, next) {
     if (!(req.body.username && req.body.password && req.body.confirmPassword)) throw Error("All fields are required.")
 
     // Create account
+    createUser(req.body.username, req.body.password)
 
     // Create session
 
@@ -37,7 +39,22 @@ router.post('/', async function(req, res, next) {
 
 
 // Database operations for these routes
-
+async function createUser(username, password) {
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING, {useUnifiedTopology: true});
+  try {
+    await client.connect();
+    const db = await client.db(process.env.DB_DATABASE_NAME);
+    const result = await db.collection('AppUsers').insertOne({
+        username,
+        password,
+        sessions: [],
+        workouts: [],
+    })
+}
+finally {
+    await client.close()
+}
+}
 
 // Middleware functions ---
 
