@@ -43,14 +43,19 @@ app.use((req, res, next) => {
   next();
 })
 
-// setup req.user
+// setup res.locals.user
 app.use(async (req, res, next) => {
-  const sessionId = req.session.sessionId;
-  req.user = null;
-  if (!sessionId) return next()
-  const user = await findUser(sessionId);
-  req.user = user;
-  next()
+  try {
+    const sessionId = req.session.sessionId;
+    res.locals.user = null;
+    if (!sessionId) return next()
+    const user = await findUser(sessionId);
+    res.locals.user = user;
+    next()
+  }
+  catch(error) {
+    next(error)
+  }
 })
 
 
@@ -84,7 +89,7 @@ function throwError404(req, res, next) {
 }
 
 function requireLogIn(req,res,next) {
-  if(!req.user) return res.redirect('/login');
+  if(!res.locals.user) return res.redirect('/login');
   next();
 }
 

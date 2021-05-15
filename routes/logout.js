@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 const {MongoClient, ObjectID} = require('mongodb');
 const bcrypt = require('bcryptjs');
-const debug = require('debug')('app:login');
+const debug = require('debug')('app:logout');
 
 router.post('/', async function(req, res, next) {
   try {
-    if (!req.user) throw Error("Cannot logout, because not logged in.")
+    if (!res.locals.user) throw Error("Cannot logout, because not logged in.")
 
     // Delete all of users's sessions on server
-    const username = req.user.username;
+    const username = res.locals.user.username;
     await deleteSessions(username)
 
     // Delete user's session cookie
