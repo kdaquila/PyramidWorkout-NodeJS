@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {MongoClient, ObjectID} = require('mongodb');
 const bcrypt = require('bcryptjs');
-const debug = require('debug')('signup');
+const debug = require('debug')('app:signup');
 const validator = require('validator');
 
 router.get('/', async function(req, res, next) {
@@ -52,9 +52,10 @@ router.post('/', async function(req, res, next) {
   }
   catch (error) {
     debug(error.message)
+    debug(error.stack)
     req.session.flash = {
       status: "error",
-      message:  "Sorry, your request could not be processed."
+      message:  "Sorry, the request failed."
     }
     res.redirect('/signup')
   }
@@ -62,24 +63,24 @@ router.post('/', async function(req, res, next) {
 
 
 // Database operations for these routes
-async function createUserWithSession(username, password) {
-  const client = new MongoClient(process.env.DB_CONNECTION_STRING, {useUnifiedTopology: true});
+async function createUserWithSession(username, passwordHash) {
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
   try {
     await client.connect();
     const db = await client.db(process.env.DB_DATABASE_NAME);
     return await db.collection('AppUsers').insertOne({
-        username,
-        password,
-        sessions: [{
-          _id: new ObjectID(),
-          expiration: process.env.SESSION_DURATION_MS
-        }],
-        workouts: [],
+      username,
+      passwordHash,
+      sessions: [{
+        _id: new ObjectID(),
+        expiration: process.env.SESSION_DURATION_MS
+      }],
+      workouts: [],
     })
-}
-finally {
+  }
+  finally {
     await client.close()
-}
+  }
 }
 
 // Middleware functions ---

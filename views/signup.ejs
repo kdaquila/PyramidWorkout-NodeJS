@@ -32,6 +32,7 @@
 
 <!-- Form Validation -->
 <script>
+    const passwordBox = document.getElementById('passwordTextBox');
     const confirmPasswordBox = document.getElementById('confirmPasswordTextBox');
     confirmPasswordBox.addEventListener('mouseout', () => {        
         if (passwordBox.value !== confirmPasswordBox.value) {
