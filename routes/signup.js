@@ -73,7 +73,7 @@ async function createUserWithSession(username, passwordHash) {
       passwordHash,
       sessions: [{
         _id: new ObjectID(),
-        expiration: process.env.SESSION_DURATION_MS
+        expiration: Number(process.env.SESSION_DURATION_MS)
       }],
       workouts: [],
     })
