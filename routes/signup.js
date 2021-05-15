@@ -3,7 +3,7 @@ const router = express.Router();
 const {MongoClient, ObjectID} = require('mongodb');
 const bcrypt = require('bcryptjs');
 const debug = require('debug')('signup');
-const {FriendlyError} = require('../customError');
+const validator = require('validator');
 
 router.get('/', async function(req, res, next) {
   try {
@@ -16,9 +16,18 @@ router.get('/', async function(req, res, next) {
 
 router.post('/', async function(req, res, next) {
   try {
-    // Validate inputs
-    if (!(req.body.username && req.body.password && req.body.confirmPassword)) throw new FriendlyError("All fields are required.")
-    if (req.body.password !== req.body.confirmPassword) throw new FriendlyError("Passwords must match.")
+    let username = req.body.username
+    let password = req.body.password
+    
+    // Validate username
+    if (!username) throw Error("Missing username")
+    username = validator.stripLow(validator.trim(username))
+    if (username.length < 5) throw Error("Username is too short")
+
+    // Validate password
+    if (!password) throw Error("Missing password")
+    password = validator.stripLow(validator.trim(password))
+    if (password.length < 5) throw Error("Password is too short")   
 
     // Hash the password
     let passwordHash = await new Promise((resolve, reject) => {
@@ -31,13 +40,13 @@ router.post('/', async function(req, res, next) {
     // Create account
     const user = await createUserWithSession(req.body.username, passwordHash)
 
-    // Get session Id
+    // Get the auto-generated session Id
     const userSessions = user.ops[0].sessions;
     req.session.sessionId = userSessions[0]._id.id.toString('hex');
 
     req.session.flash = {
       status: "success",
-      message: "account was successully created"
+      message: "Success, your account was successully created!"
     }
     res.redirect('/browse')
   }
@@ -45,7 +54,7 @@ router.post('/', async function(req, res, next) {
     debug(error.message)
     req.session.flash = {
       status: "error",
-      message:  error instanceof FriendlyError ? error.message : "Sorry, your request could not be processed."
+      message:  "Sorry, your request could not be processed."
     }
     res.redirect('/signup')
   }
