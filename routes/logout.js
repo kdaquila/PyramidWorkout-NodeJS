@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const {MongoClient, ObjectID} = require('mongodb');
-const bcrypt = require('bcryptjs');
 const debug = require('debug')('app:logout');
 
 router.post('/', async function(req, res, next) {
