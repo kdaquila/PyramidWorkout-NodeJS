@@ -38,9 +38,13 @@
 }
 
 .navbar__link{
-  margin-left: 40px;
+  margin-left: 20px;
   text-decoration: none;
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  @media screen and (min-width: sizes.$sm) {
+    margin-left: 40px;
+  }
 }
