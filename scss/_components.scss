@@ -1,7 +1,8 @@
-@use "sizes";
-@use "fonts";
+@use "borders";
 @use "colors";
+@use "fonts";
 @use "sass:map";
+@use "sizes";
 
 .featureCard__img {
     height: 60px;
@@ -82,4 +83,82 @@
 
 .flashMessage__text--error {
     color: rgb(122, 44, 44);
+}
+
+.workout__grid {
+    @extend .bg-gray-98;
+    display: grid;
+    @include fonts.sans-font("sm"); 
+    @include fonts.sans-font("lg","lg"); 
+    align-items: center;
+    grid-template-columns: 50px auto auto;
+
+    @media screen and (min-width: sizes.$sm) {
+        grid-template-columns: 50px auto auto auto auto;
+    }
+}
+
+.workout__checkbox {
+    grid-column: 1;
+
+    &--header {
+        @extend .workout__checkbox;
+    }
+}
+
+.workout__date {
+    padding: 15px;
+    @extend .gray-border-bottom;
+    grid-column: 2;
+
+    &--header {
+        @extend .workout__date;
+        @include fonts.sans-bold-font("sm"); 
+        @include fonts.sans-bold-font("lg","lg"); 
+    }
+}
+
+.workout__exerciseName {
+    grid-column: 3;
+
+    &--header {
+        @extend .workout__exerciseName;
+        @include fonts.sans-bold-font("sm"); 
+        @include fonts.sans-bold-font("lg","lg"); 
+    }
+}
+
+.workout__completedNumber {
+    grid-column: 4;
+    display: none;
+
+    @media screen and (min-width: sizes.$sm){
+        display: block;
+    }
+
+    &--header {
+        @extend .workout__completedNumber;
+        @include fonts.sans-bold-font("sm"); 
+        @include fonts.sans-bold-font("lg","lg");  
+    }
+}
+
+.workout__percentage {
+    grid-column: 5;
+    display: none;
+
+    @media screen and (min-width: sizes.$sm){
+        display: block;
+    }
+
+    &--header {
+        @extend .workout__percentage;
+        @include fonts.sans-bold-font("sm"); 
+        @include fonts.sans-bold-font("lg","lg");  
+    }
+}
+
+.workout__link {
+    text-decoration: none;
+    color: black;
 }
