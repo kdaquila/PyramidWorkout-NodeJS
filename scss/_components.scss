@@ -58,10 +58,6 @@
     padding: 0.5em;
     box-sizing: border-box;
     width: 100%;
-
-    @media screen and (min-width: sizes.$sm) {
-        min-width: 300px;
-    }
 }
 
 .flashMessage {

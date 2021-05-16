@@ -5,6 +5,7 @@
   display: inline-block;
   min-width: 10em;
   color: white;
+  text-align: center;
   text-decoration: none;
   padding: 0.7em 1.5em;
   margin: 0.5em 0.5em 0.5em 0;
@@ -26,13 +27,20 @@
   &:focus {
     box-shadow: 0 0 0.1em 0.2em rgba(0,0,0,0.50);
   }
-} 
+}
+
+.iconButton-red {
+  @extend .button-red;
+  min-width: 0;
+  padding: 0.7em;
+}
 
 
 .ghostButton-gray {
   display: inline-block;
   min-width: 10em;
   color: map.get(map.get(colors.$font-colors,"gray"), "1");
+  text-align: center;
   text-decoration: none;
   outline: none;
   margin: 0.5em;
@@ -53,4 +61,11 @@
   &:focus {
     box-shadow: 0 0 0.1em 0.2em rgba(0,0,0,0.50);
   }
+}
+
+.iconGhostButton-gray {
+  @extend .ghostButton-gray;
+  min-width: 0;
+  padding: 0.7em;
+  margin: 0.5em 0.5em 0.5em 0;
 }

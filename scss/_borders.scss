@@ -4,3 +4,7 @@
 .red-border-bottom {
   border-bottom: 1px solid map.get(colors.$red-palette, "45");
 }
+
+.gray-border-bottom {
+  border-bottom: 1px solid map.get(colors.$gray-palette, "55");
+}

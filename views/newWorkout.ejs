@@ -14,8 +14,49 @@
 <%- include('./_flashMessage') %>
 
 <section class="body__expandingSection">
-    <div class="container">
-        <p class="My(50px) text-brown-2">New Workout</p>
+    <div class="container D(f) Jc(c) Mb(50px)">
+        <!-- Centering wrapper -->
+        <form class="Fxb(100%) Fxb(50%)--lg" action="/newWorkout" method="POST">
+            <!-- Button toolbar -->
+            <div class="D(f) Jc(sb) Ai(c) gray-border-bottom Pb(10px) Mb(15px)">
+                <a class="iconGhostButton-gray" href="/browse"><img class="H(15px) H(20px)--sm D(b)" src="/image/CloseIcon.svg" alt="CloseIcon" title="Cancel"></a>
+                <button class="iconButton-red" type="submit"><img class="H(15px) H(20px)--sm D(b)" src="/image/SendIcon.svg" alt="SendIcon" title="Save and Start"></button>                
+            </div>
+
+            <h1 class="sans-bold-2xl sans-bold-5xl-@sm Mb(15px)">New Workout</h1>
+
+            <div class="row">
+                <div class="col-6">
+                    <label class="form__label" for="exerciseBox">Exercise</label>
+                    <input class="form__textbox" type="text" name="exerciseName" id="exerciseBox">
+                </div>
+                <div class="col-6"> 
+                    <label class="form__label" for="unitsBox">Units</label>
+                    <input class="form__textbox" type="text" name="unitsName" id="unitsBox">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label class="form__label" for="level1GoalBox">Level 1 Goal</label>
+                    <input class="form__textbox" type="text" name="level1Goal" id="level1GoalBox">
+                </div>
+                <div class="col-6"> 
+                    <label class="form__label" for="level2GoalBox">Level 2 Goal</label>
+                    <input class="form__textbox" type="text" name="level2Goal" id="level2GoalBox">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label class="form__label" for="highestLevelBox">Highest Level</label>
+                    <input class="form__textbox" type="text" name="highestLevel" id="highestLevelBox">
+                </div>
+            </div>
+
+
+
+        </form>
     </div>
 </section>
 
