@@ -60,6 +60,9 @@ app.use(async (req, res, next) => {
 
 
 // setup static routes
+app.use('/favicon.ico', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'image', 'favicon.ico'));
+});
 app.use('/image', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'image', req.url));
 });
