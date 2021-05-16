@@ -22,7 +22,7 @@ router.post('/', async function(req, res, next) {
 
     // Check the password
     const givenPassword = req.body.password;
-    const actualPasswordHash = user.passwordHash    
+    const actualPasswordHash = user.PasswordHash    
     const passwordValid = await bcrypt.compare(givenPassword, actualPasswordHash)
     if (!passwordValid) throw Error("Invalid password")
 
@@ -30,7 +30,7 @@ router.post('/', async function(req, res, next) {
     const result = await insertNewSession(username);
 
     // Get the newly-generated session Id
-    const userSessions = result.value.sessions;
+    const userSessions = result.value.Sessions;
     req.session.sessionId = userSessions[userSessions.length - 1]._id.id.toString('hex');
 
     req.session.flash = {
@@ -52,31 +52,29 @@ router.post('/', async function(req, res, next) {
 
 
 // Database operations for these routes
-async function findUser(username) {
+async function findUser(Username) {
   const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
   try {
     await client.connect();
     const db = await client.db(process.env.DB_DATABASE_NAME);
-    return await db.collection('AppUsers').findOne({
-      username
-    })
+    return await db.collection('AppUsers').findOne({Username})
   }
   finally {
     await client.close()
   }
 }
 
-async function insertNewSession(username) {
+async function insertNewSession(Username) {
   const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
   try {
     await client.connect();
     const db = await client.db(process.env.DB_DATABASE_NAME);
     return await db.collection('AppUsers').findOneAndUpdate(
-      {username},
+      {Username},
       {$push: {
-        sessions: {
+        Sessions: {
           _id: new ObjectID(),
-          expiration: process.env.SESSION_DURATION_MS
+          Expiration: process.env.SESSION_DURATION_MS
         }
       }}, {
        returnOriginal: false 

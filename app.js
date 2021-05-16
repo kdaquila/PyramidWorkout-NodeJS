@@ -109,7 +109,7 @@ async function findUser(sessionId) {
     await client.connect();
     const db = await client.db(process.env.DB_DATABASE_NAME);
     const result = await db.collection('AppUsers').findOne({
-      'sessions._id': {
+      'Sessions._id': {
         $eq: ObjectID(sessionId),
       }
     })

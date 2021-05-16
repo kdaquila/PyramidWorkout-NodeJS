@@ -41,7 +41,7 @@ router.post('/', async function(req, res, next) {
     const user = await createUserWithSession(req.body.username, passwordHash)
 
     // Get the auto-generated session Id
-    const userSessions = user.ops[0].sessions;
+    const userSessions = user.ops[0].Sessions;
     req.session.sessionId = userSessions[0]._id.id.toString('hex');
 
     req.session.flash = {
@@ -63,19 +63,19 @@ router.post('/', async function(req, res, next) {
 
 
 // Database operations for these routes
-async function createUserWithSession(username, passwordHash) {
+async function createUserWithSession(Username, PasswordHash) {
   const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
   try {
     await client.connect();
     const db = await client.db(process.env.DB_DATABASE_NAME);
     return await db.collection('AppUsers').insertOne({
-      username,
-      passwordHash,
-      sessions: [{
+      Username,
+      PasswordHash,
+      Sessions: [{
         _id: new ObjectID(),
-        expiration: Number(process.env.SESSION_DURATION_MS)
+        Expiration: Number(process.env.SESSION_DURATION_MS)
       }],
-      workouts: [],
+      Workouts: [],
     })
   }
   finally {

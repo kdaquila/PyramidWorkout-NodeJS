@@ -8,7 +8,7 @@ router.post('/', async function(req, res, next) {
     if (!res.locals.user) throw Error("Cannot logout, because not logged in.")
 
     // Delete all of users's sessions on server
-    const username = res.locals.user.username;
+    const username = res.locals.user.Username;
     await deleteSessions(username)
 
     // Delete user's session cookie
@@ -33,15 +33,15 @@ router.post('/', async function(req, res, next) {
 
 
 // Database operations for these routes
-async function deleteSessions(username) {
+async function deleteSessions(Username) {
   const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
   try {
     await client.connect();
     const db = await client.db(process.env.DB_DATABASE_NAME);
     return await db.collection('AppUsers').updateOne(
-      {username},
+      {Username},
       {$set: {
-        sessions: []
+        Sessions: []
       }}
     )
   }
