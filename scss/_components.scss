@@ -85,80 +85,52 @@
     color: rgb(122, 44, 44);
 }
 
-.workout__grid {
-    @extend .bg-gray-98;
-    display: grid;
-    @include fonts.sans-font("sm"); 
-    @include fonts.sans-font("lg","lg"); 
-    align-items: center;
-    grid-template-columns: 50px auto auto;
+.workout__table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
 
-    @media screen and (min-width: sizes.$sm) {
-        grid-template-columns: 50px auto auto auto auto;
-    }
+    @include fonts.sans-font("sm");
+    @include fonts.sans-font("lg","md");
+    @extend .bg-gray-95;
 }
 
-.workout__checkbox {
-    grid-column: 1;
-
-    &--header {
-        @extend .workout__checkbox;
-    }
-}
-
-.workout__date {
-    padding: 15px;
+.workout__headerRow {
+    @include fonts.sans-bold-font("sm"); 
+    @include fonts.sans-bold-font("lg","md"); 
     @extend .gray-border-bottom;
-    grid-column: 2;
-
-    &--header {
-        @extend .workout__date;
-        @include fonts.sans-bold-font("sm"); 
-        @include fonts.sans-bold-font("lg","lg"); 
-    }
-}
-
-.workout__exerciseName {
-    grid-column: 3;
-
-    &--header {
-        @extend .workout__exerciseName;
-        @include fonts.sans-bold-font("sm"); 
-        @include fonts.sans-bold-font("lg","lg"); 
-    }
-}
-
-.workout__completedNumber {
-    grid-column: 4;
-    display: none;
-
-    @media screen and (min-width: sizes.$sm){
-        display: block;
-    }
-
-    &--header {
-        @extend .workout__completedNumber;
-        @include fonts.sans-bold-font("sm"); 
-        @include fonts.sans-bold-font("lg","lg");  
-    }
-}
-
-.workout__percentage {
-    grid-column: 5;
-    display: none;
-
-    @media screen and (min-width: sizes.$sm){
-        display: block;
-    }
-
-    &--header {
-        @extend .workout__percentage;
-        @include fonts.sans-bold-font("sm"); 
-        @include fonts.sans-bold-font("lg","lg");  
-    }
 }
 
 .workout__link {
     text-decoration: none;
     color: black;
+}
+
+.workout__checkbox {
+    width: 10%;    
+    padding: 15px;
+}
+
+.workout__date {
+    text-align: center;
+    width: 20%;
+    padding: 15px;
+}
+
+.workout__exerciseName {
+    text-align: center;
+    width: 40%;    
+    padding: 15px;
+}
+
+.workout__completedNumber {
+    text-align: right;
+    width: 20%;
+    padding: 15px;
+}
+
+.workout__percentage {
+    text-align: right;
+    width: 20%;
+    padding: 15px;
 }

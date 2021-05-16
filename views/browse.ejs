@@ -18,34 +18,50 @@
         <!-- Button toolbar -->
         <div class="D(f) Jc(sb) Ai(c) gray-border-bottom">
             <div class="D(f) Ai(c)">
-                <a class="iconGhostButton-gray" href="/browse"><img class="H(15px) H(25px)--sm D(b)" src="/image/OpenIcon.svg" alt="OpenIcon" title="New Workout"></a>
+                <a class="iconGhostButton-gray" href="/newWorkout"><img class="H(15px) H(25px)--sm D(b)" src="/image/OpenIcon.svg" alt="OpenIcon" title="New Workout"></a>
                 <button class="iconGhostButton-gray" type="submit"><img class="H(15px) H(25px)--sm D(b)" src="/image/DeleteIcon.svg" alt="DeleteIcon" title="Delete Selected"></a>
             </div>
-            <button class="iconButton-red" type="submit"><img class="H(15px) H(25px)--sm D(b)" src="/image/SendIcon.svg" alt="SendIcon" title="Save and Start"></button>                
+            <div class="D(f) Ai(c)">
+                <a class="iconGhostButton-gray" href="/browse"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon.svg" alt="LeftArrow" title="Previous Page"></a>
+                <a class="iconGhostButton-gray" href="/browse"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon.svg" alt="RightArrow" title="Next Page"></a>
+            </div>               
         </div>
 
         <!-- Workouts -->
-        <div class="workout__grid">
+        <table class="workout__table">
+            <thead>
+                <tr class="workout__headerRow">                    
+                    <th class="workout__checkbox"><input type="checkbox" name="selectAll" id="selectAll"></th>
+                    <th class="workout__date">Date</th>
+                    <th class="workout__exerciseName">Exercise</th>
+                    <th class="workout__completedNumber">Total</th>
+                    <th class="workout__percentage">%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="gray-border-bottom">
+                    <th class="workout__checkbox"><input type="checkbox" name="123456" id="123456"></th>
+                    <td class="workout__date"><a class="workout__link" href="/workout/1">2021–11–12</a></td>
+                    <td class="workout__exerciseName"><a class="workout__link" href="/workout/1">Push-ups</a></td>
+                    <td class="workout__completedNumber"><a class="workout__link" href="/workout/1">20 reps</a></td>
+                    <td class="workout__percentage"><a class="workout__link" href="/workout/1">45%</a></td>
+                </tr>
+                <tr class="gray-border-bottom">
+                    <th class="workout__checkbox"><input type="checkbox" name="123456" id="123456"></th>
+                    <td class="workout__date"><a class="workout__link" href="/workout/2">2021–11–11</a></td>
+                    <td class="workout__exerciseName"><a class="workout__link" href="/workout/2">Cycling</a></td>
+                    <td class="workout__completedNumber"><a class="workout__link" href="/workout/2">10 min</a></td>
+                    <td class="workout__percentage"><a class="workout__link" href="/workout/2">10%</a></td>
+                </tr>
+            </tbody>
+            
 
-                <input class="workout__checkbox--header" type="checkbox" name="selectAll" id="selectAll">
-                <p class="workout__date--header">Date</p>
-                <p class="workout__exerciseName--header">Exercise</p>
-                <p class="workout__completedNumber--header">Total</p>
-                <p class="workout__percentage--header">%</p>
+                
 
-                <input class="workout__checkbox" type="checkbox" name="123456" id="123456">
-                <p class="workout__date"><a class="workout__link" href="/workout/1">2021–11–12</a></p>
-                <p class="workout__exerciseName"><a class="workout__link" href="/workout/1">Push-ups</a></p>
-                <p class="workout__completedNumber"><a class="workout__link" href="/workout/1">20 reps</a></p>
-                <p class="workout__percentage"><a class="workout__link" href="/workout/1">45%</a></p>
+                
 
-                <input class="workout__checkbox" type="checkbox" name="123456" id="123456">
-                <p class="workout__date"><a class="workout__link" href="/workout/2">2021–11–11</a></p>
-                <p class="workout__exerciseName"><a class="workout__link" href="/workout/2">Cycling</a></p>
-                <p class="workout__completedNumber"><a class="workout__link" href="/workout/2">10 min</a></p>
-                <p class="workout__percentage"><a class="workout__link" href="/workout/2">10%</a></p>
 
-        </div>
+        </table>
 
     </form>
 </section>
