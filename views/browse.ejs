@@ -44,19 +44,14 @@
             </div>
         </div>
 
-        <% function formatTwoDigits(n) {
-                let newString = n.toString();
-                return newString.length == 1 ? "0" + newString : newString;
-            }   
-        %>
-
         <% workouts && workouts.forEach(workout => { %>
             <div class="workout__row--hover">
                 <div class="workout__checkbox"><input type="checkbox" name="<%= workout._id %>" id="<%= workout._id %>"></div>
                 <a class="workout__dataContainer" href="/workout/<%= workout._id %>">
                     <div class="workout__date">
-                        <p class="workout__datePart"><%=workout.CreationDate.getFullYear()%>-<%= workout.CreationDate.getMonth()+1 %>-<%=workout.CreationDate.getDate()%>,</p>
-                        <p class="workout__timePart"><%=workout.CreationDate.getHours()%12%>:<%= formatTwoDigits(workout.CreationDate.getMinutes()) %> <%=workout.CreationDate.getHours()/12 > 1 ? "PM" : "AM"%></p>
+                        <p class="workout__datePart"><%= workout.CreationDate.getFullYear() %>-<%= printf('%02d', workout.CreationDate.getMonth()+1) %>-<%= printf('%02d', workout.CreationDate.getDate()) %>,</p>
+                        <!-- <p class="workout__timePart"><%= workout.CreationDate.getHours()%12 %>:<%= formatTwoDigits(workout.CreationDate.getMinutes()) %> <%= workout.CreationDate.getHours()/12 > 1 ? "PM" : "AM"%></p> -->
+                        <p class="workout__timePart"><%= printf('%02d', workout.CreationDate.getHours()%12) %>:<%= printf('%02d', workout.CreationDate.getMinutes()) %> <%= workout.CreationDate.getHours()/12 > 1 ? "PM" : "AM"%></p>
                     </div>
                     <div class="workout__exerciseName"><%= workout.ExerciseName %></div>
                     <div class="workout__completedNumber"><%= workout.ActualTotal %> <%= workout.Units %></div>

@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const {MongoClient, ObjectID} = require('mongodb');
+const printf = require('printf');
 
 router.get('/', async function(req, res, next) {
   try {
-    let workouts = await findWorkouts(res.locals.user.Username);
+    let workouts = await findWorkouts(res.locals.user.Username, 0);
     res.locals.workouts = workouts;
+    res.locals.printf = printf;
     res.render('browse');
   }
   catch (error) {
@@ -15,7 +17,7 @@ router.get('/', async function(req, res, next) {
 
 
 // Database operations for these routes
-async function findWorkouts(Username) {
+async function findWorkouts(Username, pageNumber=0) {
   const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
   try {
     await client.connect();
@@ -58,7 +60,11 @@ async function findWorkouts(Username) {
       }},
 
     ]
-    let workouts = await db.collection('AppUsers').aggregate(pipeline).sort({'CreationDate': -1}).skip(0).limit(2)
+    let workouts = await db.collection('AppUsers')
+      .aggregate(pipeline)
+      .sort({'CreationDate': -1})
+      .skip(pageNumber*Number(process.env.WORKOUTS_PER_PAGE))
+      .limit(Number(process.env.WORKOUTS_PER_PAGE))
     workouts = await workouts.toArray();
     return workouts;
   }
