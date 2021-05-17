@@ -8,7 +8,6 @@
   text-align: center;
   text-decoration: none;
   padding: 0.7em 1.5em;
-  margin: 0.5em 0.5em 0.5em 0;
   outline: none;
   border: 0.1em solid transparent;
   border-radius: 0.2em;
@@ -33,7 +32,6 @@
   @extend .button-red;
   min-width: 0;
   padding: 5px;
-  margin: 15px 15px 15px 0;
 }
 
 
@@ -44,7 +42,6 @@
   text-align: center;
   text-decoration: none;
   outline: none;
-  margin: 0.5em;
   padding: 0.7em 1.5em;
   border-radius: 0.2em;
   border: 0.1em solid map.get(colors.$gray-palette, "50");
@@ -68,5 +65,4 @@
   @extend .ghostButton-gray;
   min-width: 0;
   padding: 5px;
-  margin: 15px 15px 15px 0;
 }
