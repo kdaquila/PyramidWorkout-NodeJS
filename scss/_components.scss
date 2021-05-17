@@ -85,52 +85,78 @@
     color: rgb(122, 44, 44);
 }
 
-.workout__table {
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 100%;
-
+.workout__row {
+    display: flex;
     @include fonts.sans-font("sm");
     @include fonts.sans-font("lg","md");
     @extend .bg-gray-95;
-}
-
-.workout__headerRow {
-    @include fonts.sans-bold-font("sm"); 
-    @include fonts.sans-bold-font("lg","md"); 
     @extend .gray-border-bottom;
 }
 
-.workout__link {
+.workout__row--hover {
+    @extend .workout__row;
+
+    &:hover {
+        @extend .bg-gray-90;
+    }
+}
+
+.workout__row--header {
+    @extend .workout__row;
+    @include fonts.sans-bold-font("sm");
+    @include fonts.sans-bold-font("lg","md");
+}
+
+
+.workout__dataContainer {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-between;   
+    padding: 25px 15px;
     text-decoration: none;
-    color: black;
+    color: black;  
 }
 
 .workout__checkbox {
-    width: 10%;    
-    padding: 15px;
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
 }
 
 .workout__date {
     text-align: center;
-    width: 20%;
-    padding: 15px;
+    width: 50%;
+
+    @media screen and (min-width: sizes.$sm) {
+        width: 25%;
+    }
 }
 
 .workout__exerciseName {
-    text-align: center;
-    width: 40%;    
-    padding: 15px;
+    text-align: right;
+    width: 50%;
+
+    @media screen and (min-width: sizes.$sm) {
+        width: 25%;
+    }
 }
 
 .workout__completedNumber {
-    text-align: right;
-    width: 20%;
-    padding: 15px;
+    display: none;
+
+    @media screen and (min-width: sizes.$sm) {
+        text-align: right;
+        display: block;
+        width: 25%;
+    }
 }
 
 .workout__percentage {
-    text-align: right;
-    width: 20%;
-    padding: 15px;
+    display: none;
+
+    @media screen and (min-width: sizes.$sm) {
+        text-align: right;
+        display: block;
+        width: 25%;
+    }
 }
