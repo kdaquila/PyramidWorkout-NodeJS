@@ -100,6 +100,7 @@ function requireLogIn(req,res,next) {
 function defaultErrorHandler(err, req, res, next) {
   debug(err.message)
   debug(`could not display ${req.url}`)
+  res.render('error')
 }
 
 // Database functions ---
