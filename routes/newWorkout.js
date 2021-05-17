@@ -24,7 +24,7 @@ router.post('/', async function(req, res, next) {
 
     // Add workout to user
     let workoutId = workout.ops[0]._id.id.toString('hex')
-    await addWorkoutToAppUser(workoutId, res.locals.user.username)
+    await addWorkoutToAppUser(workoutId, res.locals.user.Username)
 
     req.session.flash = {
       status: "success",
@@ -86,12 +86,12 @@ async function createWorkout(CreationDate, ExerciseName, Units, Level1Goal, Leve
   }
 }
 
-async function addWorkoutToAppUser(workoutId, username) {
+async function addWorkoutToAppUser(workoutId, Username) {
   const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
   try {
     await client.connect();
     const db = await client.db(process.env.DB_DATABASE_NAME);
-    return await db.collection('AppUsers').updateOne({username},{$push: {Workouts: new ObjectID(workoutId)}})
+    return await db.collection('AppUsers').updateOne({Username},{$push: {Workouts: new ObjectID(workoutId)}})
   }
   finally {
     await client.close()
@@ -106,3 +106,5 @@ async function addWorkoutToAppUser(workoutId, username) {
 
 
 module.exports.router = router;
+module.exports.createWorkout = createWorkout;
+module.exports.addWorkoutToAppUser = addWorkoutToAppUser;
