@@ -125,38 +125,48 @@
 
 .workout__date {
     text-align: center;
-    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
 
-    @media screen and (min-width: sizes.$sm) {
-        width: 25%;
+    @media screen and (min-width: sizes.$lg) {
+        width: 30%;
     }
+}
+
+.workout__datePart {
+    margin-right: 0.5em;
+}
+
+.workout__timePart {
+    margin-right: 2em;
 }
 
 .workout__exerciseName {
     text-align: right;
-    width: 50%;
+    width: auto;
 
-    @media screen and (min-width: sizes.$sm) {
-        width: 25%;
+    @media screen and (min-width: sizes.$lg) {
+        width: 20%;
     }
 }
 
 .workout__completedNumber {
     display: none;
 
-    @media screen and (min-width: sizes.$sm) {
+    @media screen and (min-width: sizes.$lg) {
         text-align: right;
         display: block;
-        width: 25%;
+        width: 40%;
     }
 }
 
 .workout__percentage {
     display: none;
 
-    @media screen and (min-width: sizes.$sm) {
+    @media screen and (min-width: sizes.$lg) {
         text-align: right;
         display: block;
-        width: 25%;
+        width: 10%;
     }
 }
