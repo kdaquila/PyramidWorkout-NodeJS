@@ -14,11 +14,11 @@
 <%- include('./_flashMessage') %>
 
 <section class="body__expandingSection">
-    <form class="container" action="/workout/delete" method="POST">
+    <form class="container Mb(50px)" action="/workout/delete" method="POST">
 
         <!-- Paging display -->
         <div class="D(f) Jc(fe)"> 
-            <p class="sans-sm sans-lg-@md text-gray-2"><%= startIndex %>-<%= stopIndex %> of <%= workouts.length %></p>
+            <p class="sans-sm sans-lg-@md text-gray-2"><%= startIndex %>-<%= stopIndex %> of <%= workoutCount %></p>
         </div>
 
         <!-- Button toolbar -->
