@@ -5,9 +5,16 @@ const printf = require('printf');
 
 router.get('/', async function(req, res, next) {
   try {
-    let workouts = await findWorkouts(res.locals.user.Username, 0);
+    let pageNumber = Number(req.query.page) || 0;
+    let workouts = await findWorkouts(res.locals.user.Username, pageNumber);
     res.locals.workouts = workouts;
     res.locals.printf = printf;
+    res.locals.startIndex = pageNumber * process.env.WORKOUTS_PER_PAGE + 1;
+    res.locals.stopIndex = workouts && workouts.length < process.env.WORKOUTS_PER_PAGE ? workouts.length : (pageNumber + 1) * process.env.WORKOUTS_PER_PAGE;
+    res.locals.isPrevAvail = res.locals.startIndex > 1;
+    res.locals.isNextAvail = workouts && workouts.length > 0 && res.locals.stopIndex < workouts.length;
+    res.locals.nextPage = pageNumber + 1;
+    res.locals.prevPage = ((pageNumber - 1) < 0) ? 0 : (pageNumber - 1);
     res.render('browse');
   }
   catch (error) {

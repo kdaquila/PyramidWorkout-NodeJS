@@ -18,7 +18,7 @@
 
         <!-- Paging display -->
         <div class="D(f) Jc(fe)"> 
-            <p class="sans-sm sans-lg-@md text-gray-2">10-20 of <%= workouts.length %></p>
+            <p class="sans-sm sans-lg-@md text-gray-2"><%= startIndex %>-<%= stopIndex %> of <%= workouts.length %></p>
         </div>
 
         <!-- Button toolbar -->
@@ -28,8 +28,18 @@
                 <button class="iconGhostButton-gray My(15px) " type="submit"><img class="H(15px) H(25px)--sm D(b)" src="/image/DeleteIcon.svg" alt="DeleteIcon" title="Delete Selected"></a>
             </div>
             <div class="D(f) Ai(c)">
-                <a class="iconGhostButton-gray My(15px) Mend(15px)" href="/browse"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon.svg" alt="LeftArrow" title="Previous Page"></a>
-                <a class="iconGhostButton-gray My(15px)" href="/browse"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon.svg" alt="RightArrow" title="Next Page"></a>
+                <!-- Previous Page Button -->
+                <% if (isPrevAvail) { %>
+                    <a class="iconGhostButton-gray My(15px) Mend(15px)" href="/browse?page=<%= prevPage %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon.svg" alt="LeftArrow" title="Previous Page"></a>
+                <% } else { %>
+                    <div class="iconGhostButton-gray My(15px) Mend(15px)"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon--disabled.svg" alt="LeftArrowDisabled" title="Previous Page"></div>
+                <% } %>
+                <!-- Next Page Button -->       
+                <% if (isNextAvail) { %>
+                    <a class="iconGhostButton-gray My(15px)" href="/browse?page=<%= nextPage %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon.svg" alt="RightArrow" title="Next Page"></a>
+                <% } else { %>
+                    <div class="iconGhostButton-gray My(15px)"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon--disabled.svg" alt="RightArrowDisabled" title="Next Page"></div>
+                <% } %>
             </div>               
         </div>
 
@@ -50,7 +60,6 @@
                 <a class="workout__dataContainer" href="/workout/<%= workout._id %>">
                     <div class="workout__date">
                         <p class="workout__datePart"><%= workout.CreationDate.getFullYear() %>-<%= printf('%02d', workout.CreationDate.getMonth()+1) %>-<%= printf('%02d', workout.CreationDate.getDate()) %>,</p>
-                        <!-- <p class="workout__timePart"><%= workout.CreationDate.getHours()%12 %>:<%= formatTwoDigits(workout.CreationDate.getMinutes()) %> <%= workout.CreationDate.getHours()/12 > 1 ? "PM" : "AM"%></p> -->
                         <p class="workout__timePart"><%= printf('%02d', workout.CreationDate.getHours()%12) %>:<%= printf('%02d', workout.CreationDate.getMinutes()) %> <%= workout.CreationDate.getHours()/12 > 1 ? "PM" : "AM"%></p>
                     </div>
                     <div class="workout__exerciseName"><%= workout.ExerciseName %></div>
