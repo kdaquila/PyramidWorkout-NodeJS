@@ -7,12 +7,13 @@ router.get('/', async function(req, res, next) {
   try {
     let pageNumber = Number(req.query.page) || 0;
     let workouts = await findWorkouts(res.locals.user.Username, pageNumber);
+    res.locals.workoutCount = await countWorkouts(res.locals.user.Username);
     res.locals.workouts = workouts;
     res.locals.printf = printf;
     res.locals.startIndex = pageNumber * process.env.WORKOUTS_PER_PAGE + 1;
-    res.locals.stopIndex = workouts && workouts.length < process.env.WORKOUTS_PER_PAGE ? workouts.length : (pageNumber + 1) * process.env.WORKOUTS_PER_PAGE;
+    res.locals.stopIndex = res.locals.workoutCount < process.env.WORKOUTS_PER_PAGE ? res.locals.workoutCount : (pageNumber + 1) * process.env.WORKOUTS_PER_PAGE;
     res.locals.isPrevAvail = res.locals.startIndex > 1;
-    res.locals.isNextAvail = workouts && workouts.length > 0 && res.locals.stopIndex < workouts.length;
+    res.locals.isNextAvail = workouts && workouts.length > 0 && res.locals.stopIndex < res.locals.workoutCount;
     res.locals.nextPage = pageNumber + 1;
     res.locals.prevPage = ((pageNumber - 1) < 0) ? 0 : (pageNumber - 1);
     res.render('browse');
@@ -74,6 +75,29 @@ async function findWorkouts(Username, pageNumber=0) {
       .limit(Number(process.env.WORKOUTS_PER_PAGE))
     workouts = await workouts.toArray();
     return workouts;
+  }
+  finally {
+    await client.close()
+  }
+}
+
+async function countWorkouts(Username) {
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
+  try {
+    await client.connect();
+    const db = await client.db(process.env.DB_DATABASE_NAME);    
+    let pipeline = [
+      {'$match': {
+        'Username': Username
+      }}, 
+      
+      {'$project': {
+        'WorkoutCount': {'$size': "$Workouts"}
+      }}, 
+    ]
+    let workouts = await db.collection('AppUsers').aggregate(pipeline)
+    workouts = await workouts.toArray();
+    return workouts[0].WorkoutCount;
   }
   finally {
     await client.close()
