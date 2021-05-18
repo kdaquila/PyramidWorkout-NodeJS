@@ -30,13 +30,13 @@
             <div class="D(f) Ai(c)">
                 <!-- Previous Page Button -->
                 <% if (isPrevAvail) { %>
-                    <a class="iconGhostButton-gray My(15px) Mend(15px)" href="/browse?page=<%= prevPage %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon.svg" alt="LeftArrow" title="Previous Page"></a>
+                    <a class="iconGhostButton-gray My(15px) Mend(15px)" href="/browse?<%= query %>page=<%= prevPage %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon.svg" alt="LeftArrow" title="Previous Page"></a>
                 <% } else { %>
                     <div class="iconGhostButton-gray My(15px) Mend(15px)"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon--disabled.svg" alt="LeftArrowDisabled" title="Previous Page"></div>
                 <% } %>
                 <!-- Next Page Button -->       
                 <% if (isNextAvail) { %>
-                    <a class="iconGhostButton-gray My(15px)" href="/browse?page=<%= nextPage %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon.svg" alt="RightArrow" title="Next Page"></a>
+                    <a class="iconGhostButton-gray My(15px)" href="/browse?<%= query %>page=<%= nextPage %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon.svg" alt="RightArrow" title="Next Page"></a>
                 <% } else { %>
                     <div class="iconGhostButton-gray My(15px)"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon--disabled.svg" alt="RightArrowDisabled" title="Next Page"></div>
                 <% } %>
@@ -47,7 +47,11 @@
         <div class="workout__row--header">                    
             <div class="workout__checkboxContainer"><input type="checkbox" name="selectAll" id="selectAll"></div>
             <div class="workout__dataContainer">
-                <div class="workout__date">Date</div>
+                <% if (sortDir === "1") { %>
+                    <div class="workout__date"><a class="C(#000000) Td(n) D(f) Ai(c)" href="/browse/?sortKey=CreationDate&sortDir=-1">Date <img class="Mstart(0.5em) H(1em)" src="/image/UpArrowIcon.svg" alt="UpArrow" title="Asc"></a></div>
+                <% } else { %>
+                    <div class="workout__date"><a class="C(#000000) Td(n) D(f) Ai(c)" href="/browse/?sortKey=CreationDate&sortDir=1">Date <img class="Mstart(0.5em) H(1em)" src="/image/DownArrowIcon.svg" alt="DownArrow" title="Desc"></a></div>
+                <% } %>
                 <div class="workout__exerciseName">Exercise</div>
                 <div class="workout__completedNumber">Total</div>
                 <div class="workout__percentage">Percent</div>
