@@ -23,6 +23,17 @@ router.get('/', async function(req, res, next) {
   }
 });
 
+router.post('/delete', async function(req, res, next) {
+  try {
+    let workoutObjectIds = Object.keys(req.body).map((id)=>new ObjectID(id))    
+    deleteWorkouts(res.locals.user.Username, workoutObjectIds)
+    return res.redirect('/browse');
+  }
+  catch (error) {
+    next(error)
+  }
+});
+
 
 // Database operations for these routes
 async function findWorkouts(Username, pageNumber=0) {
@@ -98,6 +109,28 @@ async function countWorkouts(Username) {
     let workouts = await db.collection('AppUsers').aggregate(pipeline)
     workouts = await workouts.toArray();
     return workouts[0].WorkoutCount;
+  }
+  finally {
+    await client.close()
+  }
+}
+
+async function deleteWorkouts(Username, idObjArray) {
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
+  try {
+    await client.connect();
+    const db = await client.db(process.env.DB_DATABASE_NAME);    
+
+    // Delete workouts ids from AppUser document
+    await db.collection('AppUsers').updateOne(
+      {Username},
+      {$pull: {Workouts: {$in: idObjArray}}})
+
+    // Delete workout documents from Workouts collection
+    await db.collection('Workouts').deleteMany(
+      {_id: {$in: idObjArray}}
+    )
+
   }
   finally {
     await client.close()
