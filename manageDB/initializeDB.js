@@ -21,7 +21,7 @@ async function insertSeedData() {
     const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
     try {
         let currDate = new Date();
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i > -30; i--) {
             // Create the workout and add workout to user
             let newDate = new Date(currDate);
             newDate.setDate(currDate.getDate() + i);
