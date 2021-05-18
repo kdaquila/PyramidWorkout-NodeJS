@@ -25,7 +25,7 @@ router.get('/', async function(req, res, next) {
 
 router.post('/delete', async function(req, res, next) {
   try {
-    let workoutObjectIds = Object.keys(req.body).map((id)=>new ObjectID(id))    
+    let workoutObjectIds = Object.keys(req.body).filter((id)=> id!=="selectAll").map((id)=>new ObjectID(id))    
     deleteWorkouts(res.locals.user.Username, workoutObjectIds)
     return res.redirect('/browse');
   }

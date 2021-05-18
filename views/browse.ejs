@@ -45,7 +45,7 @@
 
         <!-- Workouts -->
         <div class="workout__row--header">                    
-            <div class="workout__checkbox"><input type="checkbox" name="selectAll" id="selectAll"></div>
+            <div class="workout__checkboxContainer"><input type="checkbox" name="selectAll" id="selectAll"></div>
             <div class="workout__dataContainer">
                 <div class="workout__date">Date</div>
                 <div class="workout__exerciseName">Exercise</div>
@@ -56,11 +56,14 @@
 
         <% workouts && workouts.forEach(workout => { %>
             <div class="workout__row--hover">
-                <div class="workout__checkbox"><input type="checkbox" name="<%= workout._id %>" id="<%= workout._id %>"></div>
+                <div class="workout__checkboxContainer"><input class="workout__checkbox" type="checkbox" name="<%= workout._id %>" id="<%= workout._id %>"></div>
                 <a class="workout__dataContainer" href="/workout/<%= workout._id %>">
                     <div class="workout__date">
                         <p class="workout__datePart"><%= workout.CreationDate.getFullYear() %>-<%= printf('%02d', workout.CreationDate.getMonth()+1) %>-<%= printf('%02d', workout.CreationDate.getDate()) %>,</p>
-                        <p class="workout__timePart"><%= printf('%02d', workout.CreationDate.getHours()%12) %>:<%= printf('%02d', workout.CreationDate.getMinutes()) %> <%= workout.CreationDate.getHours()/12 > 1 ? "PM" : "AM"%></p>
+                        <%  let hours = workout.CreationDate.getHours();
+                            if (hours === 0) {hours = 12;}
+                            else if (hours > 12) {hours = hours - 12;} %>
+                        <p class="workout__timePart"><%= printf('%02d', hours) %>:<%= printf('%02d', workout.CreationDate.getMinutes()) %> <%= workout.CreationDate.getHours()/12 > 1 ? "PM" : "AM"%></p>
                     </div>
                     <div class="workout__exerciseName"><%= workout.ExerciseName %></div>
                     <div class="workout__completedNumber"><%= workout.ActualTotal %> <%= workout.Units %></div>
@@ -73,6 +76,11 @@
 </section>
 
 <%- include('./_footer'); %>
+
+<script src="/javascript/syncCheckboxes.js"></script>
+<script>
+    syncCheckboxSetup("#selectAll", "[class*=workout__checkbox]")
+</script>
 
 </body>
 </html>
