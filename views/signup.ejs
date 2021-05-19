@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include('./_head_shared_content'); %>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title>Signup</title>
 </head>
 
@@ -24,7 +25,8 @@
             <label class="form__label" for="passwordTextBox">Password</label>
             <input class="form__textbox" type="password" name="password" id="passwordTextBox">
             <label class="form__label" for="confirmPasswordTextBox">Confirm Password</label>
-            <input class="form__textbox" type="password" name="confirmPassword" id="confirmPasswordTextBox" minlength="5">
+            <input class="form__textbox Mb(50px)" type="password" name="confirmPassword" id="confirmPasswordTextBox" minlength="5">
+            <div class="g-recaptcha Mb(50px)" data-sitekey="6LcmTtsaAAAAAEmKsFBP5gZe_Ani3tRbXoaYUH61"></div>
             <button class="button-red sans-bold-xs sans-bold-lg-@sm Mb(50px)" type="submit">Submit</button>
         </form>
     </div>
