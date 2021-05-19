@@ -26,11 +26,7 @@ router.post('/', async function(req, res, next) {
     let workoutId = workout.ops[0]._id.id.toString('hex')
     await addWorkoutToAppUser(workoutId, res.locals.user.Username)
 
-    req.session.flash = {
-      status: "success",
-      message: "Success, workout created. Enjoy!"
-    }
-    return res.redirect('detail');
+    return res.redirect('/detail/' + workoutId + "/0");
   }
   catch (error) {
     debug(error.message)
