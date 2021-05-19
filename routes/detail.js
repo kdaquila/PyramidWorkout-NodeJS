@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {MongoClient, ObjectID, ObjectId} = require('mongodb');
 const printf = require('printf');
+const debug = require('debug')('app:detail')
 
 router.get('/:WorkoutId/:LevelIndex', async function(req, res, next) {
   try {
@@ -28,11 +29,33 @@ router.get('/:WorkoutId/:LevelIndex', async function(req, res, next) {
     res.locals.percentDone = workoutStats.percentDone;
     res.locals.isPrevAvail = res.locals.levelIndex > 0;
     res.locals.isNextAvail = res.locals.levelIndex < (workout.Levels.length - 1);
+    res.locals.printf = printf;
 
     res.render('detail');
   }
   catch (error) {
     next(error)
+  }
+});
+
+router.post('/:WorkoutId/:LevelIndex', async function(req, res, next) {
+  try {
+    let actualDone = Number(req.body.actualDone)
+    let workoutStats = await findWorkoutStats(res.locals.user, req.params.WorkoutId)
+    if(actualDone > workoutStats.maxGoal) actualDone = workoutStats.maxGoal;
+
+    await updateWorkoutActualReps(res.locals.user, req.params.WorkoutId, req.params.LevelIndex, actualDone)
+
+    return res.redirect('/detail/' + req.url);
+  }
+  catch (error) {
+    debug(error.message)
+    debug(error.stack)
+    req.session.flash = {
+      status: "error",
+      message:  "Sorry, the save attempt failed."
+    }
+    return res.redirect('/detail/' + req.url);
   }
 });
 
@@ -85,6 +108,26 @@ async function findWorkoutStats(user, workoutId) {
     let results = await db.collection('Workouts').aggregate(pipeline)
     results = (await results.toArray())[0]
     return results;
+  }
+  finally {
+    await client.close()
+  }
+}
+
+async function updateWorkoutActualReps(user, workoutId, levelIndex, actualReps) {
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING, { useUnifiedTopology: true });
+
+  // Make sure user owns the workout
+  let isAuthorized = user.Workouts.filter((workout)=> workout.id.toString('hex') === workoutId).length === 1;
+  if (!isAuthorized) throw Error("Invalid workout id for current user")
+
+  try {
+    await client.connect();
+    const db = await client.db(process.env.DB_DATABASE_NAME);
+    let updateObj = {};
+    updateObj["$set"] = {};
+    updateObj["$set"][`Levels.${levelIndex}.Actual`] = actualReps;
+    return await db.collection('Workouts').updateOne({_id: ObjectID(workoutId)}, updateObj)
   }
   finally {
     await client.close()

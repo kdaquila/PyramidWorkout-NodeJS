@@ -16,7 +16,7 @@
 <section class="body__expandingSection">
     <div class="container D(f) Jc(c) Mb(50px)">
         <!-- Centering wrapper -->
-        <form class="Fxb(100%) Fxb(50%)--lg" action="/detail/<%= workoutId %>/<%= levelIndex %>" method="POST">
+        <form class="Fxb(100%) Fxb(50%)--lg" action="/detail/<%= workoutId %>/<%= levelIndex %>" method="POST" id="mainForm">
             <!-- Button toolbar -->
             <div class="D(f) Jc(sb) Ai(c) gray-border-bottom Pb(10px) Mb(15px)">
                 <a class="iconGhostButton-gray My(15px)" href="/browse"><img class="H(15px) H(20px)--sm D(b)" src="/image/CloseIcon.svg" alt="CloseIcon" title="Cancel"></a>
@@ -77,13 +77,13 @@
 
                 <!-- Button for 'Goal' -->
                 <div class="Mend(30px) Pos(r)">
-                    <button class="iconButton-red W(4em) sans-2xl" type="button" id="goalButton"><%= Levels[levelIndex].Goal %></button>
+                    <button class="iconButton-red W(4em) sans-2xl" type="submit" id="goalButton"><%= Levels[levelIndex].Goal %></button>
                     <p class="sans-lg Pos(a) T(100%) Ta(c) W(100%)">Goal</p>   
                 </div>
 
                 <!-- Next Page Button -->       
                 <% if (isNextAvail) { %>
-                    <a class="iconGhostButton-gray My(15px)" href="/detail/<%= workoutId %>/<%= Number(levelIndex) + 1 %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon.svg" alt="RightArrow" title="Next Page"></a>
+                    <a class="iconGhostButton-gray My(15px)" href="/detail/<%= workoutId %>/<%= Number(levelIndex) + 1 %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon.svg" alt="RightArrow" title="Next Page" id='rightArrow'></a>
                 <% } else { %>
                     <div class="iconGhostButton-gray My(15px)"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon--disabled.svg" alt="RightArrowDisabled" title="Next Page"></div>
                 <% } %>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="Fxb(50%) Ta(e)">
                     <h1 class="sans-2xl Mb(15px)">Percent</h1>
-                    <input class="form__textbox Ta(e)" type="text" value="<%= percentDone %>%">
+                    <input class="form__textbox Ta(e)" type="text" value="<%= printf('%.0f', percentDone) %>%">
                 </div>
             </div>
 
@@ -109,8 +109,10 @@
 <%- include('./_footer'); %>
 
 <script src="/javascript/goalButton.js"></script>
+<script src="/javascript/autoSubmit.js"></script>
 <script>
-    goalButton()
+    goalButton();
+    autoSubmit('#actualDone', 'blur');
 </script>
 
 </body>
