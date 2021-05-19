@@ -45,7 +45,7 @@
             </div>               
         </div>
 
-        <!-- Workouts -->
+        <!-- Workouts header -->
         <div class="workout__row--header">                    
             <div class="workout__checkboxContainer"><input type="checkbox" name="selectAll" id="selectAll"></div>
             <div class="workout__dataContainer">
@@ -60,6 +60,7 @@
             </div>
         </div>
 
+        <!-- Workouts -->
         <% workouts && workouts.forEach(workout => { %>
             <div class="workout__row--hover">
                 <div class="workout__checkboxContainer"><input class="workout__checkbox" type="checkbox" name="<%= workout._id %>" id="<%= workout._id %>"></div>
@@ -74,7 +75,7 @@
                     </div>
                     <div class="workout__exerciseName"><%= workout.ExerciseName %></div>
                     <div class="workout__completedNumber"><%= workout.ActualTotal %> <%= workout.Units %></div>
-                    <div class="workout__percentage"><%= workout.Percent %>%</div>
+                    <div class="workout__percentage"><%= printf('%.0f', workout.Percent) %>%</div>
                 </a>
             </div>
         <% }); %>

@@ -91,3 +91,4 @@ async function createUserWithSession(Username, PasswordHash) {
 
 
 module.exports.router = router;
+module.exports.createUserWithSession = createUserWithSession;
