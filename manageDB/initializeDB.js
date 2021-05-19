@@ -18,8 +18,8 @@ async function createUniqueIndexes() {
 
 async function insertSeedData() {
     // Generate admin's password's hash
-    let username = 'user1';
-    let password = 'password';
+    let username = process.env.ADMIN_USERNAME;
+    let password = process.env.ADMIN_PASSWORD;
     let passwordHash = await new Promise((resolve, reject) => {
         bcrypt.hash(password, 10, (err, hash) => {
           if (err) reject(err);
