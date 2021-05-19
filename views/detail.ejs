@@ -14,12 +14,104 @@
 <%- include('./_flashMessage') %>
 
 <section class="body__expandingSection">
-    <div class="container">
-        <p class="My(50px) text-brown-2">Detail</p>
+    <div class="container D(f) Jc(c) Mb(50px)">
+        <!-- Centering wrapper -->
+        <form class="Fxb(100%) Fxb(50%)--lg" action="/detail/<%= workoutId %>/<%= levelIndex %>" method="POST">
+            <!-- Button toolbar -->
+            <div class="D(f) Jc(sb) Ai(c) gray-border-bottom Pb(10px) Mb(15px)">
+                <a class="iconGhostButton-gray My(15px)" href="/browse"><img class="H(15px) H(20px)--sm D(b)" src="/image/CloseIcon.svg" alt="CloseIcon" title="Cancel"></a>
+                <button class="iconGhostButton-gray My(15px) " type="submit"><img class="H(15px) H(20px)--sm D(b)" src="/image/SaveIcon.svg" alt="SaveIcon" title="Save"></button>                
+            </div>
+
+            <!-- Info bar -->
+            <div class="D(f) text-gray-2 sans-lite-xs sans-lite-lg-@sm Mb(25px)">
+                <p class="Mend(15px)" ><%= ExerciseName %> (<%= Units %>)</p>
+                <p class="Mend(15px)" ><%= dateString %></p>
+                <p class="" ><%= timeString %></p>
+            </div>
+
+            <!-- Bar plot -->
+            <div class="D(f) H(175px) W(100%) Mb(15px)">
+                <% function normalize(value, maxValue, minValue) {
+                    return (value - minValue)/(maxValue - minValue)
+                } %>
+                <% for(let i = 0; i < Levels.length; i++) { %>  
+                    <% let level = Levels[i] %>
+                    <% let goalHeight = String(Math.round(normalize(level.Goal, maxGoal, 0) * 175)) + "px"%>
+                    <% let actualHeight = String(Math.round(normalize(level.Actual, maxGoal, 0) * 175)) + "px"%>
+                    <a class="D(b) Pos(r) H(175px) Fxb(100%) Mend(5px)" href="/detail/<%= workoutId %>/<%= i %>" title="<%= level.Actual %>/<%= level.Goal %>">
+                        <div class="Pos(a) B(0) bg-gray-90 Bgc(#d8d8d8):hover W(100%) Z(1)" style="height: <%= goalHeight %>"></div>
+                        <div class="Pos(a) B(0) bg-gray-25 Bgc(#1f1f1f):hover W(100%) Z(2)" style="height: <%= actualHeight %>"></div>
+                    </a>
+                <% } %>
+
+            </div>
+            
+            <!-- Indicator bar -->
+            <div class="D(f)"> 
+                <% for(let i = 0; i < Levels.length; i++) { %>
+                    <% if (i === Number(levelIndex)) { %>
+                        <div class="Fxb(100%) Mend(5px) H(2em)"><img class="H(1em)" src="/image/TriangleMarkerIcon.svg" alt="TriangleMarkerIcon"></div>
+                    <% }  else { %>
+                        <div class="Fxb(100%) Mend(5px) H(2em)"></div>
+                    <% } %>
+                <% } %>                
+            </div>
+            
+            <h1 class="sans-bold-2xl Ta(c) Mb(15px)"><%= Levels[levelIndex].LevelName %></h1>
+
+            <!-- Level controls -->
+            <div class="D(f) Jc(c) Ai(c) Pb(50px) gray-border-bottom Mb(15px)">
+                <!-- Previous Page Button -->
+                <% if (isPrevAvail) { %>
+                    <a class="iconGhostButton-gray My(15px) Mend(30px)" href="/detail/<%= workoutId %>/<%= Number(levelIndex) - 1 %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon.svg" alt="LeftArrow" title="Previous Page"></a>
+                <% } else { %>
+                    <div class="iconGhostButton-gray My(15px) Mend(30px)"><img class="H(15px) H(25px)--sm D(b)" src="/image/LeftArrowIcon--disabled.svg" alt="LeftArrowDisabled" title="Previous Page"></div>
+                <% } %>
+
+                <!-- Input for 'Actual' -->
+                <div class="Mend(30px) Pos(r)">
+                    <input class="ghostInput-gray W(4em) Ov(h) Ta(c) sans-2xl" type="text" name="actualDone" id="actualDone" value="<%= Levels[levelIndex].Actual %>">
+                    <p class="sans-lg Pos(a) T(100%) Ta(c) W(100%)">Actual</p>
+                </div>
+
+                <!-- Button for 'Goal' -->
+                <div class="Mend(30px) Pos(r)">
+                    <button class="iconButton-red W(4em) sans-2xl" type="button" id="goalButton"><%= Levels[levelIndex].Goal %></button>
+                    <p class="sans-lg Pos(a) T(100%) Ta(c) W(100%)">Goal</p>   
+                </div>
+
+                <!-- Next Page Button -->       
+                <% if (isNextAvail) { %>
+                    <a class="iconGhostButton-gray My(15px)" href="/detail/<%= workoutId %>/<%= Number(levelIndex) + 1 %>"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon.svg" alt="RightArrow" title="Next Page"></a>
+                <% } else { %>
+                    <div class="iconGhostButton-gray My(15px)"><img class="H(15px) H(25px)--sm D(b)" src="/image/RightArrowIcon--disabled.svg" alt="RightArrowDisabled" title="Next Page"></div>
+                <% } %>
+            </div>
+
+            <!-- Workout Statistics -->
+            <div class="D(f)">
+                <div class="Fxb(50%) Ta(e) Mend(15px)">
+                    <h1 class="sans-2xl Mb(15px)">Total</h1>
+                    <input class="form__textbox Ta(e)" type="text" value="<%= totalDone %> <%= Units %>">
+                </div>
+                <div class="Fxb(50%) Ta(e)">
+                    <h1 class="sans-2xl Mb(15px)">Percent</h1>
+                    <input class="form__textbox Ta(e)" type="text" value="<%= percentDone %>%">
+                </div>
+            </div>
+
+
+        </form>
     </div>
 </section>
 
 <%- include('./_footer'); %>
+
+<script src="/javascript/goalButton.js"></script>
+<script>
+    goalButton()
+</script>
 
 </body>
 </html>

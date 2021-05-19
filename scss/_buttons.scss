@@ -14,6 +14,7 @@
   background-image: linear-gradient(0deg, map.get(colors.$red-palette, "30"), map.get(colors.$red-palette, "40"));
   background-origin: border-box;
   cursor: pointer;
+  box-sizing: border-box;
 
   &:hover {
     background-image: linear-gradient(0deg, map.get(colors.$red-palette, "25"), map.get(colors.$red-palette, "35"));
@@ -47,6 +48,7 @@
   border: 0.1em solid map.get(colors.$gray-palette, "50");
   cursor: pointer;
   background-color: transparent;
+  box-sizing: border-box;
 
   &:hover {
     background-color: map.get(colors.$gray-palette, "95");
@@ -65,4 +67,11 @@
   @extend .ghostButton-gray;
   min-width: 0;
   padding: 5px;
+}
+
+.ghostInput-gray {
+  @extend .ghostButton-gray;
+  min-width: 0;
+  padding: 5px;
+  cursor: default;
 }
