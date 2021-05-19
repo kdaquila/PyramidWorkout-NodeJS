@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "start": "run-s compile:styles start:server",
+    "start:pm2": "pm2 start server.js",
     "start:dev": "run-p watch:styles watch:server",
     "start:server": "node server.js",
+    "stop:pm2": "pm2 stop server",
     "watch:server": "nodemon server.js",
     "compile:atomizer": "atomizer --recursive --namespace=#atomic -c atomizer.config.js --outfile=scss/_atomic.scss ./views",
     "compile:sass": "sass scss:css",
@@ -13,7 +15,7 @@
     "watch:atomizer": "atomizer --verbose --recursive --namespace=#atomic -c atomizer.config.js --outfile=scss/_atomic.scss --watch=./views",
     "watch:sass": "sass --watch scss:css",
     "watch:styles:": "run-p watch:atomizer watch:sass",
-    "initDB": "node ./manageDB/initializeDB.js"
+    "initDB": "node ./manageDB/initializeDB.js" 
   },
   "dependencies": {
     "atomizer": "^3.8.0",
