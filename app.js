@@ -99,6 +99,7 @@ function requireLogIn(req,res,next) {
 // Middleware Error functions ---
 function defaultErrorHandler(err, req, res, next) {
   debug(err.message)
+  debug(err.stack)
   debug(`could not display ${req.url}`)
   res.render('error')
 }
