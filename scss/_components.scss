@@ -87,7 +87,7 @@
 
 .workout__row {
     display: flex;
-    @include fonts.sans-font("sm");
+    @include fonts.sans-font("xs");
     @include fonts.sans-font("lg","md");
     @extend .bg-gray-95;
     @extend .gray-border-bottom;
