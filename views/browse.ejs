@@ -63,13 +63,14 @@
         <% workouts && workouts.forEach(workout => { %>
             <div class="workout__row--hover">
                 <div class="workout__checkboxContainer"><input class="workout__checkbox" type="checkbox" name="<%= workout._id %>" id="<%= workout._id %>"></div>
-                <a class="workout__dataContainer" href="/workout/<%= workout._id %>">
+                <a class="workout__dataContainer" href="/detail/<%= workout._id %>/0">
                     <div class="workout__date">
                         <p class="workout__datePart"><%= workout.CreationDate.getFullYear() %>-<%= printf('%02d', workout.CreationDate.getMonth()+1) %>-<%= printf('%02d', workout.CreationDate.getDate()) %>,</p>
                         <%  let hours = workout.CreationDate.getHours();
                             if (hours === 0) {hours = 12;}
-                            else if (hours > 12) {hours = hours - 12;} %>
-                        <p class="workout__timePart"><%= printf('%02d', hours) %>:<%= printf('%02d', workout.CreationDate.getMinutes()) %> <%= workout.CreationDate.getHours()/12 > 1 ? "PM" : "AM"%></p>
+                            else if (hours > 12) {hours = hours - 12;} 
+                            let am_pm = workout.CreationDate.getHours()/11 > 1 ? "PM" : "AM" %>
+                        <p class="workout__timePart"><%= printf('%02d', hours) %>:<%= printf('%02d', workout.CreationDate.getMinutes()) %> <%= am_pm %></p>
                     </div>
                     <div class="workout__exerciseName"><%= workout.ExerciseName %></div>
                     <div class="workout__completedNumber"><%= workout.ActualTotal %> <%= workout.Units %></div>
