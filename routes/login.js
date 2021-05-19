@@ -33,10 +33,6 @@ router.post('/', async function(req, res, next) {
     const userSessions = result.value.Sessions;
     req.session.sessionId = userSessions[userSessions.length - 1]._id.id.toString('hex');
 
-    req.session.flash = {
-      status: "success",
-      message: "Success, you are logged in!"
-    }
     res.redirect('browse')
   }
   catch (error) {
