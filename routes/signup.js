@@ -4,6 +4,7 @@ const {MongoClient, ObjectID} = require('mongodb');
 const bcrypt = require('bcryptjs');
 const debug = require('debug')('app:signup');
 const validator = require('validator');
+const {isRecaptchaResponseValid} = require('../util/recaptcha');
 
 router.get('/', async function(req, res, next) {
   try {
@@ -18,6 +19,10 @@ router.post('/', async function(req, res, next) {
   try {
     let username = req.body.username
     let password = req.body.password
+    const g_recaptcha_response = req.body['g-recaptcha-response'];
+
+    // Validate recaptcha
+    if (!g_recaptcha_response || !(await isRecaptchaResponseValid(g_recaptcha_response))) throw new Error("recaptcha response is invalid")
     
     // Validate username
     if (!username) throw Error("Missing username")

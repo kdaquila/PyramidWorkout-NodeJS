@@ -15,7 +15,7 @@
     "watch:atomizer": "atomizer --verbose --recursive --namespace=#atomic -c atomizer.config.js --outfile=scss/_atomic.scss --watch=./views",
     "watch:sass": "sass --watch scss:css",
     "watch:styles:": "run-p watch:atomizer watch:sass",
-    "initDB": "node ./manageDB/initializeDB.js" 
+    "initDB": "node ./manageDB/initializeDB.js"
   },
   "dependencies": {
     "atomizer": "^3.8.0",
