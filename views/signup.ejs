@@ -26,7 +26,7 @@
             <input class="form__textbox" type="password" name="password" id="passwordTextBox" minlength="5" required>
             <label class="form__label" for="confirmPasswordTextBox">Confirm Password</label>
             <input class="form__textbox Mb(50px)" type="password" name="confirmPassword" id="confirmPasswordTextBox" minlength="5" required>
-            <div class="g-recaptcha Mb(50px)" data-sitekey="6LcmTtsaAAAAAEmKsFBP5gZe_Ani3tRbXoaYUH61"></div>
+            <div class="g-recaptcha Mb(50px)" data-sitekey="<%= process.env.RECAPTCHA_SITE_KEY %>"></div>
             <button class="button-red sans-bold-xs sans-bold-lg-@sm Mb(50px)" type="submit">Submit</button>
         </form>
     </div>
