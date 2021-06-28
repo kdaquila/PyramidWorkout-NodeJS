@@ -38,8 +38,9 @@
 <script>
     const passwordBox = document.getElementById('passwordTextBox');
     const confirmPasswordBox = document.getElementById('confirmPasswordTextBox');
-    confirmPasswordBox.addEventListener('mouseout', () => {        
-        if (passwordBox.value !== confirmPasswordBox.value) {
+    confirmPasswordBox.addEventListener('mouseout', () => {    
+        if (!confirmPasswordBox.value) return;
+        if (confirmPasswordBox.value != passwordBox.value) {
             confirmPasswordBox.setCustomValidity('Passwords must be the same');
         } else {
             confirmPasswordBox.setCustomValidity('');
